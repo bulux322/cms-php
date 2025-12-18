@@ -1,41 +1,57 @@
 <div class="col-md-4">
-	<?php
+	    <?php
+            if(isset($_SESSION['user_role'])){
+                $user_role = $_SESSION['user_role'];
+                $user_name = $_SESSION['username'];
 
-                            if(isset($_SESSION['user_role'])){
-                            $user_role = $_SESSION['user_role'];
-                            $user_name = $_SESSION['username'];
-                            if($user_role == 'admin') {
-                                echo "<div class='well'><h4>Hi, $user_name</h4><br><li><a href='admin/index.php'>Admin Panel</a></li><li><a href='users'>Control Panel</a></li><li><a href='admin/users.php?source=change_password'>Change Password</a></li><br><center><a class='btn btn-danger' href='logout.php'>Logout</a></center></div>";
-                            } else {
-                                echo "<div class='well'><h4>Hi, $user_name</h4><br><li><a href='../cms/users'>Control Panel</a></li><li><a href='change_password.php'>Change Password</a></li><br><center><a class='btn btn-danger' href='logout.php'>Logout</a></center></div>";
-                            }
-                           } else { //message request
-                                    if(isset($_GET['msg'])){
-                                        $msg = $_GET['msg'];
-                                        $msg2 = $_GET['msg2'];
-                                        msg_show($msg, $msg2);
-                                    } else {
-                                        $msg = '';
-                                        $msg2 = '';
-                                    }
-                                
-                            echo "<div class='well'>
-                                <h4>Login</h4>
-                                <form action='includes/login.php' method='post'>
-                                <div class='input-group'>
+                if($user_role == 'admin') {
+                    echo "<div class='well'>
+                            <h4>Hi, $user_name</h4><br>
+                            <li><a href='" . BASE_URL . "/admin/index.php'>Admin Panel</a></li>
+                            <li><a href='" . BASE_URL . "/users/index.php'>Control Panel</a></li>
+                            <li><a href='" . BASE_URL . "/admin/users.php?source=change_password'>Change Password</a></li>
+                            <br>
+                            <center><a class='btn btn-danger' href='" . BASE_URL . "/logout.php'>Logout</a></center>
+                        </div>";
+                } else {
+                    echo "<div class='well'>
+                            <h4>Hi, $user_name</h4><br>
+                            <li><a href='" . BASE_URL . "/users/index.php'>Control Panel</a></li>
+                            <li><a href='" . BASE_URL . "/change_password.php'>Change Password</a></li>
+                            <br>
+                            <center><a class='btn btn-danger' href='" . BASE_URL . "/logout.php'>Logout</a></center>
+                        </div>";
+                }
+
+            } else { // user belum login
+                if(isset($_GET['msg'])){
+                    $msg = $_GET['msg'];
+                    $msg2 = $_GET['msg2'];
+                    msg_show($msg, $msg2);
+                } else {
+                    $msg = '';
+                    $msg2 = '';
+                }
+
+                echo "<div class='well'>
+                        <h4>Login</h4>
+                        <form action='" . BASE_URL . "/includes/login.php' method='post'>
+                            <div class='input-group'>
                                 <label for='username'><i class='fa fa-fw fa-user'></i>Username:</label>
                                 <input name='username' type='text' class='form-control' placeholder='Enter Username'>
-                                </div>
-                                <div class='input-group'>
+                            </div>
+                            <div class='input-group'>
                                 <label for='password'><i class='fa fa-fw fa-key'></i>Password:</label>
                                 <input name='password' type='text' class='form-control' placeholder='Enter Password'>
-                                </div>
-                                <div class='input-group'>
+                            </div>
+                            <div class='input-group'>
                                 <button name='login' class='btn btn-default' type='submit'>Login</button>
-                                </div>
-                                </form>
-                                </div>
-                                "; } ?>
+                            </div>
+                        </form>
+                    </div>";
+            }
+        ?>
+
 		<!-- Blog recent post Well -->
 		<div class="well">
 			<h4>Recent Posts</h4>

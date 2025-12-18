@@ -10,7 +10,7 @@
     <section id="login">
                 <div class="col-xs-6 col-xs-offset-3">
                     <div class="form-wrap">                       
-                            <form role="form" action="/cms/includes/login.php" method="post" id="login-form" autocomplete="off">
+                            <form role="form" action="includes/login.php" method="post" id="login-form" autocomplete="off">
                             <div class="form-group panel panel-default panel-body">
                                 <label for="username"><i class="fa fa-fw fa-user"></i>Username</label>
                                 <input type="text" name="username" id="username" class="form-control" placeholder="Enter Your Username">
